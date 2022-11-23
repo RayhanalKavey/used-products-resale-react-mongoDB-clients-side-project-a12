@@ -17,8 +17,7 @@ const Login = () => {
   const [loginError, setLoginError] = useState("");
 
   //========== Auth Context
-  const { user, logIn, googleLogin, setUser, loading, setLoading } =
-    useContext(AuthContext);
+  const { user, logIn, googleLogin, setUser } = useContext(AuthContext);
 
   //==========redirect user
   const navigate = useNavigate();
@@ -60,7 +59,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-[800px]">
+    <div className="flex items-center justify-center h-[800px] mx-5">
       <div className="w-96 p-7 shadow-2xl">
         {" "}
         <h1 className="text-3xl my-5 text-center">Login</h1>
@@ -106,7 +105,7 @@ const Login = () => {
           </div>
 
           <input
-            className="btn btn-secondary w-full mt-5 mb-1"
+            className="btn btn-primary w-full mt-5 mb-1"
             type="submit"
             value="Login"
           />
@@ -116,16 +115,16 @@ const Login = () => {
             </label>
           )}
         </form>
-        <p className="text-center">
-          New to ........?{" "}
-          <Link className="text-secondary" to={"/signup"}>
+        <p className="text-center mt-2">
+          New to <span className="font-semibold">Laptop Utopia</span>?{" "}
+          <Link className="text-primary" to={"/signup"}>
             Create new Account
           </Link>{" "}
         </p>
         <div className="divider">or</div>
         <button
           onClick={handleGoogleLogin}
-          className="btn btn-secondary w-full btn-outline"
+          className="btn btn-primary w-full btn-outline"
           type="submit"
         >
           <svg

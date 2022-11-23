@@ -97,7 +97,7 @@ const Signup = () => {
 
   // ----------------------------//--------------------------------//
   return (
-    <div className="flex items-center justify-center h-[800px]">
+    <div className="flex items-center justify-center h-[800px] mx-5">
       <div className="w-96 p-7 shadow-2xl">
         {" "}
         <h1 className="text-3xl my-5 text-center">Sign Up</h1>
@@ -124,11 +124,14 @@ const Signup = () => {
             </label>
             <input
               type="file"
-              {...register("photoURL")}
-              className="file-input file-input-bordered w-full max-w-xs"
+              {...register("photoURL", { required: "Image is required !" })}
+              className="file-input text-primary  file-input-primary w-full max-w-xs"
               placeholder="Your Photo"
               accept="image/*"
             />
+            {errors.photoURL && (
+              <p className="text-error mt-1"> {errors.photoURL?.message}</p>
+            )}
             {/*email */}
             <label className="label">
               <span className="label-text">Email</span>
@@ -177,7 +180,7 @@ const Signup = () => {
           </div>
 
           <input
-            className="btn btn-secondary w-full mt-5 mb-1"
+            className="btn btn-primary w-full mt-5 mb-1"
             type="submit"
             value="Sign Up"
           />
@@ -187,19 +190,25 @@ const Signup = () => {
             </label>
           )}
         </form>
-        <p className="text-center">
+        <p className="text-center ">
           Already have an account?{" "}
-          <Link className="text-secondary" to={"/login"}>
+          <Link className="text-primary" to={"/login"}>
             Login
           </Link>{" "}
         </p>
-        <div className="divider">or</div>
+        <div className="divider ">or</div>
         <button
           onClick={handleGoogleLogin}
-          className="btn btn-secondary w-full btn-outline"
+          className="btn btn-primary w-full btn-outline"
           type="submit"
         >
-          Sign in with Google
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 32 32"
+            className="w-5 h-5 fill-current"
+          >
+            <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
+          </svg>
         </button>
       </div>
     </div>
