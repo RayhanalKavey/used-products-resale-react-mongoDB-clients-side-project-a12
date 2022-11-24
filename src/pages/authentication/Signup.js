@@ -29,13 +29,14 @@ const Signup = () => {
 
   // Handle Sign Up
   const handleSignUp = (data) => {
-    const { name, email, password, photoURL } = data;
+    const { name, email, password, photoURL, accountType } = data;
+    // console.log(accountType);
     setSignUpError("");
     const image = photoURL[0];
     const formData = new FormData();
     formData.append("image", image);
 
-    // send image to the dedicated image hosting server imgbb
+    /// send image to the dedicated image hosting server imgbb
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
     fetch(url, {
       method: "POST",
@@ -43,15 +44,16 @@ const Signup = () => {
     })
       .then((res) => res.json())
       .then((imgData) => {
-        console.log(imgData.data.url);
+        // console.log(imgData.data.url);
         if (imgData.success) {
           const photoURL = imgData.data.url;
-          // //Create user with email and password starT
+          ///Create user with email and password starT
           createUser(email, password)
             .then((result) => {
               const user = result.user;
               toast.success(`Welcome ${user?.displayName}`);
               handleUpdateUserProfile(name, photoURL, email);
+              saveUserToDb(name, email, photoURL, accountType);
             })
             .catch((error) => {
               setSignUpError(error.message);
@@ -61,7 +63,7 @@ const Signup = () => {
       });
   };
 
-  // Update user profile
+  /// Update user profile.
   const handleUpdateUserProfile = (name, photoURL, email) => {
     const profile = {
       displayName: name,
@@ -78,7 +80,35 @@ const Signup = () => {
       });
   };
 
-  // LogIn/sign up with google
+  /// Save user to the data base.  --1 post to the user collection
+  const saveUserToDb = (name, email, photoURL, accountType) => {
+    const newUser = { name, email, photoURL, accountType };
+    fetch(`http://localhost:5005/users`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(newUser),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("from save to db", data);
+      });
+    // fetch(`https://accudental-2-server.vercel.app/users`, {
+    //   method: "POST",
+    //   headers: { "content-type": "application/json" },
+    //   body: JSON.stringify(user),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     // console.log(data);
+    //     //jwt
+    //     if (data.acknowledged) {
+    //       setCreatedUserEmail(email);
+    //     }
+    //     // getUserToken(email);
+    //   });
+  };
+
+  /// LogIn/sign up with google
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
@@ -95,7 +125,7 @@ const Signup = () => {
       });
   };
 
-  // ----------------------------//--------------------------------//
+  // ----------------------------///--------------------------------//
   return (
     <div className="flex items-center justify-center h-[800px] mx-5">
       <div className="w-96 p-7 shadow-2xl">
@@ -104,7 +134,7 @@ const Signup = () => {
         {/* handleSubmit with react hook form */}
         <form onSubmit={handleSubmit(handleSignUp)}>
           <div className="form-control w-full max-w-xs">
-            {/* name */}
+            {/*---------- name ----------*/}
             <label className="label">
               <span className="label-text">Name</span>
             </label>
@@ -118,7 +148,7 @@ const Signup = () => {
             {errors.name && (
               <p className="text-error mt-1"> {errors.name?.message}</p>
             )}
-            {/* // //photoUrl */}
+            {/* -------photoUrl----------- */}
             <label className="label">
               <span className="label-text">Photo URL</span>
             </label>
@@ -132,7 +162,7 @@ const Signup = () => {
             {errors.photoURL && (
               <p className="text-error mt-1"> {errors.photoURL?.message}</p>
             )}
-            {/*email */}
+            {/*-------------email------------- */}
             <label className="label">
               <span className="label-text">Email</span>
             </label>
@@ -150,7 +180,40 @@ const Signup = () => {
                 {errors.email?.message}
               </p>
             )}{" "}
-            {/* // //password */}
+            {/* /// ==========Account type============= */}
+            <span className="label-text  mt-4 mb-2 ">Account Type</span>
+            <div className="border border-3 px-4 mb-4 rounded-lg">
+              <div className="form-check mt-1">
+                <label htmlFor="buyerAccount">
+                  <input
+                    {...register("accountType")}
+                    type="radio"
+                    value="Buyer Account"
+                    className="form-check-input radio w-5 h-3 checked:bg-blue-500"
+                    id="buyerAccount"
+                    defaultChecked
+                  />{" "}
+                  Buyer Account
+                </label>
+              </div>
+              <div className="form-check mb-2">
+                <label htmlFor="sellerAccount">
+                  <input
+                    {...register("accountType")}
+                    type="radio"
+                    value="Seller Account"
+                    className="form-check-input radio w-5 h-3 checked:bg-blue-500"
+                    id="sellerAccount"
+                  />{" "}
+                  Seller Account
+                </label>
+              </div>
+            </div>
+            {/* ======================== */}
+            {errors.accountType?.type === "required" && (
+              <p className="text-error mt-1"> {errors.accountTypes?.message}</p>
+            )}
+            {/*---- Password----- */}
             <label className="label">
               <span className="label-text">Password</span>
             </label>
