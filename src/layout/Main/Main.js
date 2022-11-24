@@ -1,5 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import Footer from "../../pages/shared/Footer/Footer";
 import Navbar from "../../pages/shared/Navbar/Navbar";
 
 const Main = () => {
@@ -9,7 +10,7 @@ const Main = () => {
       <Outlet></Outlet>
       {/* <PrimaryButton>hel0oooooooooo</PrimaryButton>
       <Spinner></Spinner> */}
-      <h1>footer</h1>
+      <Footer></Footer>
     </div>
   );
 };

@@ -1,8 +1,11 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import useTitle from "../../hooks/useTitle/useTitle";
+import Footer from "../../pages/shared/Footer/Footer";
 import Navbar from "../../pages/shared/Navbar/Navbar";
 
 const DashboardLayout = () => {
+  useTitle("Dashboard");
   return (
     <div>
       <Navbar></Navbar>
@@ -27,6 +30,7 @@ const DashboardLayout = () => {
           </ul>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

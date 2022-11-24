@@ -1,8 +1,10 @@
 import React from "react";
 import { Link, useRouteError } from "react-router-dom";
+import useTitle from "../../../hooks/useTitle/useTitle";
 import Navbar from "../Navbar/Navbar";
 
 const ErrorPage = () => {
+  useTitle("Error Page");
   const { status, statusText } = useRouteError();
   return (
     <>
