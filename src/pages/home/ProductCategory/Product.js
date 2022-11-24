@@ -1,10 +1,21 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import ProductDetails from "./ProductDetails";
 
 const Product = () => {
-  const products = useLoaderData();
-  console.log(products);
-  return <div>This is product</div>;
+  const data = useLoaderData();
+  const products = data?.products;
+  // console.log(products);
+  return (
+    <div className="grid  grid-cols-1 justify-items-center mx-3 my-14 gap-6">
+      {products?.map((productDetails) => (
+        <ProductDetails
+          key={productDetails?.id}
+          productDetails={productDetails}
+        ></ProductDetails>
+      ))}
+    </div>
+  );
 };
 
 export default Product;
