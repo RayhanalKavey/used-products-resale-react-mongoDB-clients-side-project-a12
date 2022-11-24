@@ -1,7 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { Link } from "react-router-dom";
 import PrimaryHeading from "../../../components/PrimaryHeading/PrimaryHeading";
+import SecondaryHeading from "../../../components/SecondaryHeading/SecondaryHeading";
 import Spinner from "../../../components/Spinner/Spinner";
+import "./ProductCategory.css";
 
 const ProductCategory = () => {
   /// --2 get product category data from data base using TanStack query //refetch
@@ -10,6 +13,7 @@ const ProductCategory = () => {
     queryFn: async () => {
       const res = await fetch(
         `${process.env.REACT_APP_api_url}/productCategory`
+        // `productCategory.json`
       );
       const data = await res.json();
       return data;
@@ -18,28 +22,28 @@ const ProductCategory = () => {
   if (isLoading) {
     return <Spinner></Spinner>;
   }
-  console.log(productCategory);
 
   return (
     <div>
-      <PrimaryHeading customClass={""}>Product Category</PrimaryHeading>
-      <div className="grid grid-col-2 lg:grid-cols-3">
+      <PrimaryHeading>Product Category</PrimaryHeading>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 justify-items-center mx-3 my-14 gap-5  ">
         {productCategory?.map((category) => (
-          <div
-            key={category?._id}
-            className="card w-96 bg-base-100 shadow-xl image-full"
-          >
-            <figure>
-              <img src={category?.categoryImg} alt="Shoes" />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">{category?.categoryName}</h2>
-
-              <div className="card-actions justify-end">
-                <button className="btn btn-primary">Buy Now</button>
+          <Link key={category?._id} to={`/productCategory/${category?._id}`}>
+            <div className="relative   h-48 w-96 shadow-slate-600 shadow-lg   ">
+              <div className="category-img ">
+                <img
+                  className="w-full h-48  rounded"
+                  src={category?.categoryImg}
+                  alt=""
+                />
+              </div>
+              <div className=" absolute top-0">
+                <PrimaryHeading customClass={"text-white text-4xl m-5"}>
+                  {category?.categoryName}
+                </PrimaryHeading>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
