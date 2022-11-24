@@ -56,6 +56,7 @@ const AuthProvider = ({ children }) => {
   //Sign-out
   const logout = () => {
     setLoading(true);
+    localStorage.removeItem("laptop-utopia");
     return signOut(auth);
   };
 

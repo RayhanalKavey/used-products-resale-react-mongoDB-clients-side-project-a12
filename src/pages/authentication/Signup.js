@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { setAuthToken } from "../../api/auth";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle/useTitle";
 
@@ -52,8 +53,11 @@ const Signup = () => {
             .then((result) => {
               const user = result.user;
               toast.success(`Welcome ${user?.displayName}`);
-              handleUpdateUserProfile(name, photoURL, email);
-              saveUserToDb(name, email, photoURL, accountType);
+              handleUpdateUserProfile(name, photoURL);
+              const newUser = { name, email, photoURL, accountType };
+
+              //--1 save to data base and get token
+              setAuthToken(newUser);
             })
             .catch((error) => {
               setSignUpError(error.message);
@@ -64,7 +68,7 @@ const Signup = () => {
   };
 
   /// Update user profile.
-  const handleUpdateUserProfile = (name, photoURL, email) => {
+  const handleUpdateUserProfile = (name, photoURL) => {
     const profile = {
       displayName: name,
       photoURL: photoURL,
@@ -80,45 +84,19 @@ const Signup = () => {
       });
   };
 
-  /// Save user to the data base.  --1 post to the user collection
-  const saveUserToDb = (name, email, photoURL, accountType) => {
-    const newUser = { name, email, photoURL, accountType };
-    fetch(`http://localhost:5005/users`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(newUser),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("from save to db", data);
-      });
-    // fetch(`https://accudental-2-server.vercel.app/users`, {
-    //   method: "POST",
-    //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify(user),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     // console.log(data);
-    //     //jwt
-    //     if (data.acknowledged) {
-    //       setCreatedUserEmail(email);
-    //     }
-    //     // getUserToken(email);
-    //   });
-  };
-
   /// LogIn/sign up with google
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
         const user = result.user;
 
-        toast.success(`Welcome ${user?.displayName}`);
+        setAuthToken(user);
         setUser(user);
 
         //Navigate user to the desired path
         navigate(from, { replace: true });
+
+        toast.success(`Welcome ${user?.displayName}`);
       })
       .catch((error) => {
         toast.error(error.message);

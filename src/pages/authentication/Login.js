@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import useTitle from "../../hooks/useTitle/useTitle";
-import SmallSpinner from "../../components/Spinner/SmallSpinner";
+import { setAuthToken } from "../../api/auth";
 
 const Login = () => {
   useTitle("Login");
-  //-----------------------
+
   const {
     register,
     formState: { errors },
@@ -16,24 +16,30 @@ const Login = () => {
   } = useForm();
   const [loginError, setLoginError] = useState("");
 
-  //========== Auth Context
-  const { user, logIn, googleLogin, setUser } = useContext(AuthContext);
+  /// Auth Context
+  const { logIn, googleLogin, setUser } = useContext(AuthContext);
 
-  //==========redirect user
+  /// redirect user
   const navigate = useNavigate();
-  //---user location where they want to go
+  //user location where they want to go
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  //-----------------------
+
+  /// Handle login
+
   const handleLogin = (data) => {
     console.log(data);
     const { email, password } = data;
     setLoginError("");
-    //Log In with email and password
+    ///Log In with email and password
     logIn(email, password)
       .then((result) => {
+        const user = result.user;
+        setAuthToken(user);
+
         //Navigate user to the desired path
         navigate(from, { replace: true });
+
         toast.success(`Welcome ${user?.displayName}`);
       })
       .catch((error) => {
@@ -41,23 +47,23 @@ const Login = () => {
       });
   };
 
-  //LogIn/sign up with google
+  ///LogIn/sign up with google
   const handleGoogleLogin = () => {
     setLoginError("");
     googleLogin()
       .then((result) => {
         const user = result.user;
         setUser(user);
-        toast.success(`Welcome ${user?.displayName}`);
-
+        setAuthToken(user);
         //Navigate user to the desired path
         navigate(from, { replace: true });
+        toast.success(`Welcome ${user?.displayName}`);
       })
       .catch((error) => {
         setLoginError(error.message);
       });
   };
-
+  //-----------------------///---------------------------//
   return (
     <div className="flex items-center justify-center h-[800px] mx-5">
       <div className="w-96 p-7 shadow-2xl">
