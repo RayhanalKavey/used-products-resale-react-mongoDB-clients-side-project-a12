@@ -28,7 +28,6 @@ const Login = () => {
   /// Handle login
 
   const handleLogin = (data) => {
-    console.log(data);
     const { email, password } = data;
     setLoginError("");
     ///Log In with email and password

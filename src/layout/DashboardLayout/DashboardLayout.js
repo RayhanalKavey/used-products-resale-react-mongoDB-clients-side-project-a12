@@ -3,6 +3,8 @@ import { Link, Outlet } from "react-router-dom";
 import PrimaryHeading from "../../components/PrimaryHeading/PrimaryHeading";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import useAdmin from "../../hooks/useAdmin/useAdmin";
+import useBuyer from "../../hooks/useBuyer/useBuyer";
+import useSeller from "../../hooks/useSeller/useSeller";
 import useTitle from "../../hooks/useTitle/useTitle";
 import Footer from "../../pages/shared/Footer/Footer";
 import Navbar from "../../pages/shared/Navbar/Navbar";
@@ -11,7 +13,9 @@ const DashboardLayout = () => {
   useTitle("Dashboard");
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
-  // console.log(isAdmin);
+  const [isBuyer] = useBuyer(user?.email);
+  const [isSeller] = useSeller(user?.email);
+  // console.log(isBuyer);
   return (
     <div>
       <Navbar></Navbar>
@@ -37,15 +41,21 @@ const DashboardLayout = () => {
               DashBoard
             </PrimaryHeading>
             {/* <!-- Sidebar content here --> */}
-            <li>
-              <Link to={"/dashboard/myOrders"}>My Orders</Link>
-            </li>
-            <li>
-              <Link to={"/dashboard/myProduct"}>My Product</Link>
-            </li>
-            <li>
-              <Link to={"/dashboard/AddProduct"}>Add Product</Link>
-            </li>
+            {isBuyer && (
+              <li>
+                <Link to={"/dashboard/myOrders"}>My Orders</Link>
+              </li>
+            )}
+            {isSeller && (
+              <>
+                <li>
+                  <Link to={"/dashboard/myProduct"}>My Product</Link>
+                </li>
+                <li>
+                  <Link to={"/dashboard/AddProduct"}>Add Product</Link>
+                </li>
+              </>
+            )}
             {isAdmin && (
               <>
                 <li>
