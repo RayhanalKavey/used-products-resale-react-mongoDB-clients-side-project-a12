@@ -14,6 +14,7 @@ import ReportedItems from "../../pages/dashboard/ReportedItem/ReportedItems";
 import Home from "../../pages/home/Home/Home";
 import Product from "../../pages/home/ProductCategory/Product";
 import ErrorPage from "../../pages/shared/ErrorPage/ErrorPage";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
@@ -53,11 +54,29 @@ const router = createBrowserRouter([
       { path: "/dashboard/myOrders", element: <MyOrders></MyOrders> },
       { path: "/dashboard/myProduct", element: <MyProduct></MyProduct> },
       { path: "/dashboard/addProduct", element: <AddProduct></AddProduct> },
-      { path: "/dashboard/allBuyer", element: <AllBuyer></AllBuyer> },
-      { path: "/dashboard/allSeller", element: <AllSeller></AllSeller> },
+      {
+        path: "/dashboard/allBuyer",
+        element: (
+          <AdminRoute>
+            <AllBuyer></AllBuyer>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allSeller",
+        element: (
+          <AdminRoute>
+            <AllSeller></AllSeller>
+          </AdminRoute>
+        ),
+      },
       {
         path: "/dashboard/reportedItems",
-        element: <ReportedItems></ReportedItems>,
+        element: (
+          <AdminRoute>
+            <ReportedItems></ReportedItems>
+          </AdminRoute>
+        ),
       },
     ],
   },

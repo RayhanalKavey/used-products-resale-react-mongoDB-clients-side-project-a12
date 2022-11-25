@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import PrimaryHeading from "../../components/PrimaryHeading/PrimaryHeading";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import useAdmin from "../../hooks/useAdmin/useAdmin";
 import useTitle from "../../hooks/useTitle/useTitle";
 import Footer from "../../pages/shared/Footer/Footer";
 import Navbar from "../../pages/shared/Navbar/Navbar";
 
 const DashboardLayout = () => {
   useTitle("Dashboard");
+  const { user } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
+  // console.log(isAdmin);
   return (
     <div>
       <Navbar></Navbar>
@@ -41,15 +46,19 @@ const DashboardLayout = () => {
             <li>
               <Link to={"/dashboard/AddProduct"}>Add Product</Link>
             </li>
-            <li>
-              <Link to={"/dashboard/allBuyer"}>All Buyer</Link>
-            </li>
-            <li>
-              <Link to={"/dashboard/allSeller"}>All Seller</Link>
-            </li>
-            <li>
-              <Link to={"/dashboard/reportedItems"}>Reported Items</Link>
-            </li>
+            {isAdmin && (
+              <>
+                <li>
+                  <Link to={"/dashboard/allBuyer"}>All Buyer</Link>
+                </li>
+                <li>
+                  <Link to={"/dashboard/allSeller"}>All Seller</Link>
+                </li>
+                <li>
+                  <Link to={"/dashboard/reportedItems"}>Reported Items</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

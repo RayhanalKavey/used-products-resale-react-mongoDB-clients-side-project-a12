@@ -105,7 +105,7 @@ const Signup = () => {
 
   // ----------------------------///--------------------------------//
   return (
-    <div className="flex items-center justify-center h-[800px] mx-5">
+    <div className="flex items-center justify-center h-[800px] mx-5 my-12">
       <div className="w-96 p-7 shadow-2xl">
         {" "}
         <h1 className="text-3xl my-5 text-center">Sign Up</h1>
