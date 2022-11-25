@@ -1,6 +1,7 @@
 import React from "react";
 import { FaLocationArrow, FaPhone, IconName } from "react-icons/fa";
 import SecondaryHeading from "../../../components/SecondaryHeading/SecondaryHeading";
+import BookingModal from "./BookingModal";
 
 const ProductDetails = ({ productDetails }) => {
   const {
@@ -53,11 +54,11 @@ const ProductDetails = ({ productDetails }) => {
               </div>
               <div className="flex gap-2 ">
                 <div className="font-semibold">Original Price:</div>
-                <div> {originalPrice}</div>
+                <div> {originalPrice} tk</div>
               </div>
               <div className="flex gap-2 ">
                 <div className="font-semibold">Resale Price:</div>
-                <div> {resalePrice}</div>
+                <div> {resalePrice} tk</div>
               </div>
               <div className="flex justify-center gap-2 ">
                 <p className="font-semibold">Post Time:</p>
@@ -81,11 +82,23 @@ const ProductDetails = ({ productDetails }) => {
             </div>
             {/* seller info   */}
           </div>
-          <div className="w-full mt-5">
-            <button className="btn btn-primary w-full">Book Now</button>
+
+          {/* /// */}
+          <div className="w-full mt-5 ">
+            <label
+              htmlFor="booking-modal"
+              className="btn btn-primary w-full rounded"
+            >
+              Book Now
+            </label>
           </div>
         </div>
       </div>
+      <BookingModal
+        itemName={name}
+        itemImg={img}
+        productPrice={resalePrice}
+      ></BookingModal>
     </div>
   );
 };
