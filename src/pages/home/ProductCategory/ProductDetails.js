@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaLocationArrow, FaPhone, IconName } from "react-icons/fa";
 import SecondaryHeading from "../../../components/SecondaryHeading/SecondaryHeading";
 import BookingModal from "./BookingModal";
 
 const ProductDetails = ({ productDetails }) => {
+  const [clearModal, setClearModal] = useState(true);
   const {
     img,
     name,
@@ -94,11 +95,14 @@ const ProductDetails = ({ productDetails }) => {
           </div>
         </div>
       </div>
-      <BookingModal
-        itemName={name}
-        itemImg={img}
-        productPrice={resalePrice}
-      ></BookingModal>
+      {clearModal && (
+        <BookingModal
+          itemName={name}
+          itemImg={img}
+          productPrice={resalePrice}
+          setClearModal={setClearModal}
+        ></BookingModal>
+      )}
     </div>
   );
 };

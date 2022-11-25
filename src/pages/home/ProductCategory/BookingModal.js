@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
-const BookingModal = ({ itemName, itemImg, productPrice }) => {
+const BookingModal = ({ itemName, itemImg, productPrice, setClearModal }) => {
   const { user } = useContext(AuthContext);
   // const
 
@@ -24,7 +25,31 @@ const BookingModal = ({ itemName, itemImg, productPrice }) => {
       itemImg,
       price,
     };
-    console.log(booking);
+    // console.log(booking);
+
+    ///post bookings
+    fetch(`${process.env.REACT_APP_api_url}/bookings`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+
+        if (data.acknowledged) {
+          //can add spinner here
+          toast.success("Booking confirmed.");
+          setClearModal(false);
+          // refetch();
+        } else {
+          toast.error(data.message);
+        }
+      });
+
+    form.reset();
   };
 
   return (
