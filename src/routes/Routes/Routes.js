@@ -15,7 +15,9 @@ import Home from "../../pages/home/Home/Home";
 import Product from "../../pages/home/ProductCategory/Product";
 import ErrorPage from "../../pages/shared/ErrorPage/ErrorPage";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoure/SellerRoute";
 
 const router = createBrowserRouter([
   {
@@ -48,12 +50,38 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        {" "}
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage></ErrorPage>,
     children: [
-      { path: "/dashboard/myOrders", element: <MyOrders></MyOrders> },
-      { path: "/dashboard/myProduct", element: <MyProduct></MyProduct> },
-      { path: "/dashboard/addProduct", element: <AddProduct></AddProduct> },
+      {
+        path: "/dashboard/myOrders",
+        element: (
+          <BuyerRoute>
+            <MyOrders></MyOrders>{" "}
+          </BuyerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/myProduct",
+        element: (
+          <SellerRoute>
+            <MyProduct></MyProduct>{" "}
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/addProduct",
+        element: (
+          <SellerRoute>
+            <AddProduct></AddProduct>
+          </SellerRoute>
+        ),
+      },
       {
         path: "/dashboard/allBuyer",
         element: (
