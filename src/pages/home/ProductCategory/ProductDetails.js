@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { FaLocationArrow, FaPhone, IconName } from "react-icons/fa";
-import SecondaryHeading from "../../../components/SecondaryHeading/SecondaryHeading";
+import { FaLocationArrow, FaPhone } from "react-icons/fa";
+import useTitle from "../../../hooks/useTitle/useTitle";
 import BookingModal from "./BookingModal";
 
 const ProductDetails = ({ productDetails }) => {
+  useTitle("Product Details");
+
   const [clearModal, setClearModal] = useState(true);
   const {
     img,

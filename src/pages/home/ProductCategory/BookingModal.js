@@ -25,7 +25,6 @@ const BookingModal = ({ itemName, itemImg, productPrice, setClearModal }) => {
       itemImg,
       price,
     };
-    // console.log(booking);
 
     ///post bookings
     fetch(`${process.env.REACT_APP_api_url}/bookings`, {
@@ -37,8 +36,6 @@ const BookingModal = ({ itemName, itemImg, productPrice, setClearModal }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
-
         if (data.acknowledged) {
           //can add spinner here
           toast.success("Booking confirmed.");
@@ -54,11 +51,6 @@ const BookingModal = ({ itemName, itemImg, productPrice, setClearModal }) => {
 
   return (
     <>
-      {/* The button to open modal
-      <label htmlFor="booking-modal" className="btn">
-        open modal
-      </label> */}
-
       {/* Put this part before </body> tag */}
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
       <div className="modal">

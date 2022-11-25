@@ -5,7 +5,12 @@ import About from "../../pages/About/About";
 import Login from "../../pages/authentication/Login";
 import Signup from "../../pages/authentication/Signup";
 import Blog from "../../pages/Blog/Blog";
+import AddProduct from "../../pages/dashboard/AddProduct/AddProduct";
+import AllBuyer from "../../pages/dashboard/AllBuyer/AllBuyer";
+import AllSeller from "../../pages/dashboard/AllSeller/AllSeller";
 import MyOrders from "../../pages/dashboard/MyOrders/MyOrders";
+import MyProduct from "../../pages/dashboard/MyProduct/MyProduct";
+import ReportedItems from "../../pages/dashboard/ReportedItem/ReportedItems";
 import Home from "../../pages/home/Home/Home";
 import Product from "../../pages/home/ProductCategory/Product";
 import ErrorPage from "../../pages/shared/ErrorPage/ErrorPage";
@@ -44,7 +49,17 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <DashboardLayout></DashboardLayout>,
     errorElement: <ErrorPage></ErrorPage>,
-    children: [{ path: "/dashboard/myOrders", element: <MyOrders></MyOrders> }],
+    children: [
+      { path: "/dashboard/myOrders", element: <MyOrders></MyOrders> },
+      { path: "/dashboard/myProduct", element: <MyProduct></MyProduct> },
+      { path: "/dashboard/addProduct", element: <AddProduct></AddProduct> },
+      { path: "/dashboard/allBuyer", element: <AllBuyer></AllBuyer> },
+      { path: "/dashboard/allSeller", element: <AllSeller></AllSeller> },
+      {
+        path: "/dashboard/reportedItems",
+        element: <ReportedItems></ReportedItems>,
+      },
+    ],
   },
 ]);
 export default router;

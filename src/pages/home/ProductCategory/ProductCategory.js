@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import PrimaryHeading from "../../../components/PrimaryHeading/PrimaryHeading";
 import SecondaryHeading from "../../../components/SecondaryHeading/SecondaryHeading";
 import Spinner from "../../../components/Spinner/Spinner";
+import useTitle from "../../../hooks/useTitle/useTitle";
 import "./ProductCategory.css";
 
 const ProductCategory = () => {
+  useTitle("Product Category");
   /// --2 get product category data from data base using TanStack query //refetch
   const { data: productCategory, isLoading } = useQuery({
     queryKey: ["productCategory"],
