@@ -65,7 +65,7 @@ const Login = () => {
   //-----------------------///---------------------------//
   return (
     <div className="flex items-center justify-center h-[800px] mx-5">
-      <div className="w-96 p-7 shadow-2xl">
+      <div className="w-96 p-7 shadow-2xl rounded">
         {" "}
         <h1 className="text-3xl my-5 text-center">Login</h1>
         {/* From react hook form */}

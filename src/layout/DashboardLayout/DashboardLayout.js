@@ -30,9 +30,9 @@ const DashboardLayout = () => {
           {/* <!-- Page content here --> */}
           <Outlet></Outlet>
         </div>
-        <div className="drawer-side shadow-lg">
+        <div className="drawer-side  shadow-slate-600 shadow-lg ">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-52  gap-2 text-base-content bg-secondary">
+          <ul className="menu p-4 w-52  gap-2 text-base-content bg-secondary  lg:bg-white">
             <PrimaryHeading
               customClass={
                 "text-xl font-semibold mb-2 bg-primary px-4 py-2 text-white rounded "

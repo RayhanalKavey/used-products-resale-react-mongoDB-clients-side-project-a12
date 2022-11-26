@@ -63,9 +63,9 @@ const ProductDetails = ({ productDetails }) => {
                 <div className="font-semibold">Resale Price:</div>
                 <div> {resalePrice} tk</div>
               </div>
-              <div className="flex justify-center gap-2 ">
-                <p className="font-semibold">Post Time:</p>
-                <div> {postTime}</div>
+              <div className="flex gap-2 ">
+                <div className="font-semibold">Post Time:</div>
+                <div> {postTime} </div>
               </div>
             </div>
             {/* product info   */}

@@ -12,9 +12,9 @@ const Product = () => {
   return (
     <>
       <div className="grid  grid-cols-1 justify-items-center mx-3 my-14 gap-10">
-        {products?.map((productDetails) => (
+        {products?.map((productDetails, i) => (
           <ProductDetails
-            key={productDetails?.id}
+            key={i}
             productDetails={productDetails}
           ></ProductDetails>
         ))}

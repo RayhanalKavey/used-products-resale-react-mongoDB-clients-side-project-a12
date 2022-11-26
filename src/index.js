@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "react-day-picker/dist/style.css";
-import AuthProvider from "./context/AuthProvider/AuthProvider";
 
+import AuthProvider from "./context/AuthProvider/AuthProvider";
+import "react-day-picker/dist/style.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Create a client
