@@ -82,8 +82,8 @@ const AddProduct = () => {
             sellerId: user?.uid,
             sellerEmail: user?.email,
           };
-          console.log(product);
-          // /// --2 save product information to the database workinG
+          // console.log(product);
+          // /// --2 save product information to the database
           fetch(`${process.env.REACT_APP_api_url}/products`, {
             method: "POST",
             headers: {
@@ -93,10 +93,10 @@ const AddProduct = () => {
           })
             .then((res) => res.json())
             .then((result) => {
-              console.log(result);
+              // console.log(result);
               toast.success(`${data?.name} is added.`);
               // //Navigate user to the desired path
-              // navigate("/dashboard/myProduct");
+              navigate("/dashboard/myProduct");
             });
           //-----
         }
