@@ -45,7 +45,7 @@ const Navbar = () => {
             <Link onClick={handleSignOut}> Logout</Link>
           </li>
           {user?.photoURL ? (
-            <li className="mr-5">
+            <li className="mr-1 sm:mr-5">
               <img
                 className="w-12 h-12 rounded-full"
                 src={user?.photoURL}
@@ -73,7 +73,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-primary text-white py-3 px-8">
+    <div className="navbar bg-primary text-white py-3 px-2 sm:px-8">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -107,7 +107,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal p-0">{navItems}</ul>
       </div>
       <div className="navbar-end ">
-        <ul className="flex gap-6 items-center">{logInOut}</ul>
+        <ul className="flex gap-2 sm:gap-6 items-center">{logInOut}</ul>
       </div>
       <label
         htmlFor="dashboard-drawer"
