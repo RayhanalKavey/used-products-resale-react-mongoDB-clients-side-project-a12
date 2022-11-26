@@ -84,20 +84,20 @@ const AddProduct = () => {
           };
           console.log(product);
           // /// --2 save product information to the database workinG
-          // fetch(`${process.env.REACT_APP_api_url}/productCategory`, {
-          //   method: "PATCH",
-          //   headers: {
-          //     "content-type": "application/json",
-          //   },
-          //   body: JSON.stringify(product),
-          // })
-          //   .then((res) => res.json())
-          //   .then((result) => {
-          //     // console.log(result);
-          //     toast.success(`${data?.name} is added.`);
-          //     // //Navigate user to the desired path
-          //     // navigate("/dashboard/myProduct");
-          //   });
+          fetch(`${process.env.REACT_APP_api_url}/products`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(product),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result);
+              toast.success(`${data?.name} is added.`);
+              // //Navigate user to the desired path
+              // navigate("/dashboard/myProduct");
+            });
           //-----
         }
       });

@@ -31,7 +31,10 @@ const ProductCategory = () => {
       </PrimaryHeading>
       <div className="grid md:grid-cols-2 lg:grid-cols-3  mx-4 my-8 mb-14 gap-5  ">
         {productCategory?.map((category) => (
-          <Link key={category?._id} to={`/productCategory/${category?._id}`}>
+          <Link
+            key={category?._id}
+            to={`/productCategory/${category?.categoryName}`}
+          >
             <div className="relative h-48  shadow-slate-600 shadow-lg   ">
               <div className="category-img ">
                 <img

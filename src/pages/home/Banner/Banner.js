@@ -5,13 +5,6 @@ import img4 from "../../../assets/banner-image/macbook-air-m2.png";
 import img3 from "../../../assets/banner-image/macbook-pro-m1.jpeg";
 import "./BannerItem.css";
 
-const bannerData = [
-  { image: img1, id: 1 },
-  { image: img2, id: 2 },
-  { image: img3, id: 3 },
-  { image: img4, id: 4 },
-];
-
 const Banner = () => {
   return (
     <div className="relative">
