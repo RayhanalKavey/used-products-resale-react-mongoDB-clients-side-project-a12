@@ -1,0 +1,27 @@
+.carousel-img:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  background: linear-gradient(to right, rgb(30, 30, 30), rgba(21, 21, 21, 0));
+  border-radius: 12px;
+}
+
+.back-gradien {
+  /* height: 95vh; */
+  background-image: linear-gradient(
+    to right bottom,
+    rgb(30, 30, 30),
+    rgba(21, 21, 21, 0)
+  );
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 75vh); */
+  z-index: -200;
+  position: relative;
+}
+/* background-attachment: fixed; */

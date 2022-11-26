@@ -26,11 +26,13 @@ const ProductCategory = () => {
 
   return (
     <div>
-      <PrimaryHeading>Product Category</PrimaryHeading>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 justify-items-center mx-3 my-14 gap-5  ">
+      <PrimaryHeading customClass="text-center mt-14">
+        Product Category
+      </PrimaryHeading>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3  mx-4 my-8 mb-14 gap-5  ">
         {productCategory?.map((category) => (
           <Link key={category?._id} to={`/productCategory/${category?._id}`}>
-            <div className="relative   h-48 w-96 shadow-slate-600 shadow-lg   ">
+            <div className="relative h-48  shadow-slate-600 shadow-lg   ">
               <div className="category-img ">
                 <img
                   className="w-full h-48  rounded"

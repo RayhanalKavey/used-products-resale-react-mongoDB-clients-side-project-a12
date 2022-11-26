@@ -1,5 +1,6 @@
 import React from "react";
 import useTitle from "../../../hooks/useTitle/useTitle";
+import Banner from "../Banner/Banner";
 import ProductCategory from "../ProductCategory/ProductCategory";
 
 const Home = () => {
@@ -7,7 +8,7 @@ const Home = () => {
 
   return (
     <div>
-      this is home
+      <Banner></Banner>
       <ProductCategory></ProductCategory>
     </div>
   );
