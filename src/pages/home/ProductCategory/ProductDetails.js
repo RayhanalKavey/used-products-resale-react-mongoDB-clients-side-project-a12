@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaLocationArrow, FaPhone } from "react-icons/fa";
+import { FaClock, FaLocationArrow, FaPhone } from "react-icons/fa";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import BookingModal from "./BookingModal";
 
@@ -20,6 +20,7 @@ const ProductDetails = ({ productDetails }) => {
     sellerMobileNo,
     description,
     yearOfPurchase,
+    soldStatus,
   } = productDetails;
   // console.log(productDetails);
   return (
@@ -63,10 +64,6 @@ const ProductDetails = ({ productDetails }) => {
                 <div className="font-semibold">Resale Price:</div>
                 <div> {resalePrice} tk</div>
               </div>
-              <div className="flex gap-2 ">
-                <div className="font-semibold">Post Time:</div>
-                <div> {postTime} </div>
-              </div>
             </div>
             {/* product info   */}
             {/* ///seller info */}
@@ -77,6 +74,10 @@ const ProductDetails = ({ productDetails }) => {
               <div className="flex sm:justify-end gap-2 items-center">
                 <FaLocationArrow></FaLocationArrow>
                 <div> {location}</div>
+              </div>
+              <div className="flex sm:justify-end gap-2 items-center">
+                <FaClock></FaClock>
+                <div> {postTime}</div>
               </div>
               <div className="flex sm:justify-end gap-2 items-center">
                 <FaPhone></FaPhone>

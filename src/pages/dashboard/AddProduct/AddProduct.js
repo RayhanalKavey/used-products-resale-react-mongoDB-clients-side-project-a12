@@ -103,6 +103,7 @@ const AddProduct = () => {
             categoryName: data?.categoryName,
             sellerId: user?.uid,
             sellerEmail: user?.email,
+            soldStatus: "Available",
           };
           /// workinG
           // console.log(product);
