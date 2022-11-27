@@ -77,8 +77,8 @@ const MyProduct = () => {
             <th className="border py-4 ">Product Name</th>
             <th className="border py-4 ">Category</th>
             <th className="border py-4 ">Price</th>
-            <th className="border py-4 ">Sales Status</th>
-            <th className="border py-4 ">Advertise</th>
+
+            <th className="border py-4 ">Sales Status and Advertisement</th>
             <th className="border py-4 ">Remove</th>
           </tr>
         </thead>
@@ -93,32 +93,50 @@ const MyProduct = () => {
                   {product?.postTime}
                 </small>
               </td>
-              <td className="border py-2 pl-2">{product?.categoryName}</td>
-              <td className="border py-2 pl-2">{product?.resalePrice} tk</td>
-              <td className="border py-2 pl-2">Available/sold</td>
-              <td className="border py-2 pl-2">
-                {" "}
-                {product?.advertisementStatus === "advertised" ? (
-                  <label
-                    ///
+              <td className="border py-2 px-2">{product?.categoryName}</td>
+              <td className="border py-2 px-2">{product?.resalePrice} tk</td>
 
-                    // onClick={() => handleAdvertisement(product)}
-                    htmlFor="confirmation-modal"
-                    className={`btn btn-sm  rounded  btn-success`}
-                    disabled
-                  >
-                    Advertised
-                  </label>
+              <td className="border py-2 px-2">
+                {product?.soldStatus === "Available" ? (
+                  <>
+                    <p className="bg-secondary my-1 rounded mb-2">
+                      Your Product is{" "}
+                      <span className="text-primary font-semibold">
+                        Available
+                      </span>{" "}
+                      <br />
+                      for Advertisement!!
+                    </p>
+                    {product?.advertisementStatus === "advertised" ? (
+                      <>
+                        <label
+                          ///
+
+                          // onClick={() => handleAdvertisement(product)}
+                          htmlFor="confirmation-modal"
+                          className={`btn btn-sm  rounded  btn-success`}
+                          disabled
+                        >
+                          Advertised
+                        </label>
+                      </>
+                    ) : (
+                      <>
+                        {" "}
+                        <label
+                          ///
+
+                          onClick={() => handleAdvertisement(product)}
+                          htmlFor="confirmation-modal"
+                          className={`btn btn-sm  rounded btn-primary cursor-pointer`}
+                        >
+                          Advertise
+                        </label>
+                      </>
+                    )}
+                  </>
                 ) : (
-                  <label
-                    ///
-
-                    onClick={() => handleAdvertisement(product)}
-                    htmlFor="confirmation-modal"
-                    className={`btn btn-sm  rounded btn-primary`}
-                  >
-                    Advertise
-                  </label>
+                  <p className="text-error">Item Sold Out!</p>
                 )}
               </td>
               <td className="border py-2 pl-2">
@@ -126,7 +144,7 @@ const MyProduct = () => {
                 <label
                   onClick={() => setDeletingProduct(product)}
                   htmlFor="confirmation-modal"
-                  className="btn btn-sm btn-error rounded"
+                  className="btn btn-xs btn-error rounded cursor-pointer"
                 >
                   Delete
                 </label>

@@ -65,13 +65,12 @@ const AddProduct = () => {
     },
   });
   const allCategory = catego?.map((category) => category?.categoryName);
-
   if (isLoading) {
     return <Spinner></Spinner>;
   }
-  // const allCategory = ["Lenovo", "Apple", "Dell"];
-
+  // console.log(catego);
   // console.log(allCategory);
+  // const allCategory = ["Lenovo", "Apple", "Dell"];
 
   ///  handle add product
   const handleAddProduct = (data) => {
