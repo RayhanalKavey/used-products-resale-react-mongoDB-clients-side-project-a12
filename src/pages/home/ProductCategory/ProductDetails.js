@@ -1,5 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { FaClock, FaLocationArrow, FaPhone } from "react-icons/fa";
+import Spinner from "../../../components/Spinner/Spinner";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import BookingModal from "./BookingModal";
 
@@ -22,7 +24,29 @@ const ProductDetails = ({ productDetails }) => {
     yearOfPurchase,
     soldStatus,
   } = productDetails;
-  // console.log(productDetails);
+
+  ///Load seller for this product
+  /// load seller data
+  const {
+    data: allSellerForVerification,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["/users/seller"],
+    queryFn: async () => {
+      const res = await fetch(`${process.env.REACT_APP_api_url}/users/seller`);
+      const data = await res.json();
+      return data;
+    },
+  });
+  if (isLoading) {
+    return <Spinner></Spinner>;
+  }
+  // console.log(allSellerForVerification);
+  const verifiedSeller = allSellerForVerification.find(
+    (vSeller) => vSeller?.name === sellerName
+  );
+  // console.log("for this product", verifiedSeller?.verifySeller);
   return (
     <div className="card lg:card-side bg-base-100 rounded h-full  shadow-slate-600 shadow-lg ">
       <figure className="lg:w-1/3">
@@ -66,10 +90,19 @@ const ProductDetails = ({ productDetails }) => {
               </div>
             </div>
             {/* product info   */}
-            {/* ///seller info */}
+            {/* ///seller info workinG */}
             <div className="sm:self-end">
               <h3 className="text-xl mt-5 sm:mt-0  sm:text-right font-semibold">
-                {sellerName}
+                <label>
+                  {verifiedSeller?.verifySeller === "verified" && (
+                    <input
+                      type="checkbox"
+                      className="accent-blue-500  mr-2"
+                      defaultChecked
+                    />
+                  )}
+                  {sellerName}
+                </label>
               </h3>
               <div className="flex sm:justify-end gap-2 items-center">
                 <FaLocationArrow></FaLocationArrow>

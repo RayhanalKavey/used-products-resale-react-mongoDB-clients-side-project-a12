@@ -40,7 +40,23 @@ const AllSeller = () => {
         }
       });
   };
+  ///verify seller workinG
+  const handleVerifySeller = (seller) => {
+    console.log("Verify", seller);
+    fetch(`${process.env.REACT_APP_api_url}/users/seller/${seller?._id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          toast.success(`Seller ${seller?.name} verified successfully.`);
+          refetch();
+        }
+      });
+  };
 
+  /// Check loading state
   if (isLoading) {
     return <Spinner></Spinner>;
   }
@@ -48,48 +64,61 @@ const AllSeller = () => {
   return (
     <div>
       <h3 className="text-3xl text-center my-5">Sellers</h3>
-      <div className="overflow-x-auto">
-        <table className="table w-full">
-          {/* <!-- head --> */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>Avatar</th>
-              <th>Name</th>
-              <th>Email</th>
 
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* <!-- row  --> */}
-            {sellers.map((seller, i) => (
-              <tr key={seller._id}>
-                <th>{i + 1}</th>
-                <td>
-                  <img
-                    src={seller?.photoURL}
-                    className="w-16 h-14 rounded-xl "
-                    alt=""
-                  />
-                </td>
-                <td>{seller?.name}</td>
-                <td>{seller?.email}</td>
+      <table className="table-auto border mb-10 text-center w-full">
+        {/* <!-- head --> */}
+        <thead className="border text-xl">
+          <tr>
+            <th className="border py-4 "></th>
+            <th className="border py-4 ">Avatar</th>
+            <th className="border py-4 ">Name</th>
+            <th className="border py-4 ">Email</th>
 
-                <td>
+            <th className="border py-4 ">Verify Seller</th>
+            <th className="border py-4 ">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* <!-- row  --> */}
+          {sellers.map((seller, i) => (
+            <tr className="border" key={seller._id}>
+              <th className="border py-4 pl-2 ">{i + 1}</th>
+              <td className="border py-2 pl-2">
+                <img
+                  src={seller?.photoURL}
+                  className="w-16 h-14 rounded-xl "
+                  alt=""
+                />
+              </td>
+              <td className="border py-2 pl-2">{seller?.name}</td>
+              <td className="border py-2 pl-2">{seller?.email}</td>
+
+              <td className="border py-2 pl-2">
+                {seller?.verifySeller !== "verified" ? (
                   <label
-                    onClick={() => setDeletingSeller(seller)}
-                    htmlFor="confirmation-modal"
-                    className="btn btn-sm btn-error"
+                    onClick={() => handleVerifySeller(seller)}
+                    className="btn btn-sm btn-primary"
                   >
-                    Delete
+                    Verify
                   </label>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                ) : (
+                  <p className="text-primary">Verified</p>
+                )}
+              </td>
+              <td className="border py-2 pl-2">
+                <label
+                  onClick={() => setDeletingSeller(seller)}
+                  htmlFor="confirmation-modal"
+                  className="btn btn-sm btn-error"
+                >
+                  Delete
+                </label>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
       {deletingSeller && (
         <ConfirmationModal
           title={`Are you sure you want to delete?`}
