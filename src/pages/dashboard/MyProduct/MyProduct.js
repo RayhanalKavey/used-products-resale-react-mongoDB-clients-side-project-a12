@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
+import ConfirmationModal from "../../../components/ConfirmationModal/ConfirmationModal";
 import Spinner from "../../../components/Spinner/Spinner";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import useTitle from "../../../hooks/useTitle/useTitle";
@@ -8,8 +9,14 @@ import useTitle from "../../../hooks/useTitle/useTitle";
 const MyProduct = () => {
   useTitle("My Products");
   const { user } = useContext(AuthContext);
-  // console.log("My products", user?.displayName);
-  /// Load  seller products
+
+  //Generic modal
+  const [deletingProduct, setDeletingProduct] = useState(null);
+  const closeModal = () => {
+    setDeletingProduct(null);
+  };
+
+  // Load  seller products
   const {
     data: products,
     isLoading,
@@ -25,7 +32,7 @@ const MyProduct = () => {
     },
   });
 
-  /// delete product
+  // delete product --4
   const handleDeleteProduct = (product) => {
     fetch(`${process.env.REACT_APP_api_url}/products/${product?._id}`, {
       method: "DELETE",
@@ -38,13 +45,32 @@ const MyProduct = () => {
         }
       });
   };
+  ///handle Advertisement --4 workinG
+  const handleAdvertisement = (product) => {
+    // console.log("clicked", product._id);
+    fetch(
+      `${process.env.REACT_APP_api_url}/products/advertised/${product?._id}`,
+      {
+        method: "PUT",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success(`Product ${product?.name} advertised successfully.`);
+          refetch();
+        }
+      });
+  };
 
   if (isLoading) {
     return <Spinner></Spinner>;
   }
   return (
     <>
-      <h3 className="text-3xl text-center my-5">My Products</h3>
+      <h3 className="text-3xl text-center my-5">
+        {user?.displayName}'s Products
+      </h3>
       <table className="table-auto border w-full mb-10 text-center">
         <thead className="border text-xl">
           <tr>
@@ -72,18 +98,33 @@ const MyProduct = () => {
               <td className="border py-2 pl-2">Available/sold</td>
               <td className="border py-2 pl-2">
                 {" "}
-                <label
-                  // onClick={() => setDeletingDoctor(doctor)}
-                  htmlFor="confirmation-modal"
-                  className="btn btn-sm btn-primary rounded"
-                >
-                  Advertise
-                </label>
+                {product?.advertisementStatus === "advertised" ? (
+                  <label
+                    ///
+
+                    // onClick={() => handleAdvertisement(product)}
+                    htmlFor="confirmation-modal"
+                    className={`btn btn-sm  rounded  btn-success`}
+                    disabled
+                  >
+                    Advertised
+                  </label>
+                ) : (
+                  <label
+                    ///
+
+                    onClick={() => handleAdvertisement(product)}
+                    htmlFor="confirmation-modal"
+                    className={`btn btn-sm  rounded btn-primary`}
+                  >
+                    Advertise
+                  </label>
+                )}
               </td>
               <td className="border py-2 pl-2">
                 {" "}
                 <label
-                  onClick={() => handleDeleteProduct(product)}
+                  onClick={() => setDeletingProduct(product)}
                   htmlFor="confirmation-modal"
                   className="btn btn-sm btn-error rounded"
                 >
@@ -94,6 +135,16 @@ const MyProduct = () => {
           ))}
         </tbody>
       </table>
+      {deletingProduct && (
+        <ConfirmationModal
+          title={`Are you sure you want to delete?`}
+          message={`Deleting of ${deletingProduct.name} cannot be undone.`}
+          closeModal={closeModal}
+          successButtonName="Delete"
+          successAction={handleDeleteProduct}
+          modalData={deletingProduct}
+        ></ConfirmationModal>
+      )}
     </>
   );
 };

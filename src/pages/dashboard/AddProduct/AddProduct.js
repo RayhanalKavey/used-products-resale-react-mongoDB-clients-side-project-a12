@@ -6,6 +6,8 @@ import PrimaryHeading from "../../../components/PrimaryHeading/PrimaryHeading";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import { format } from "date-fns";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "../../../components/Spinner/Spinner";
 
 /*
     img, (Product image)
@@ -41,13 +43,34 @@ const AddProduct = () => {
   //Product condition
   const productCondition = ["Excellent", "Good", "Fair"];
 
-  ///get product category array
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_api_url}/productCategory`)
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
-  }, []);
-  const allCategory = categories?.map((category) => category?.categoryName);
+  // ///get product category array
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_api_url}/productCategory`)
+  //     .then((res) => res.json())
+  //     .then((data) => setCategories(data));
+  // }, []);
+  // const allCategory = categories?.map((category) => category?.categoryName);
+  const {
+    data: catego,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["productCategory"],
+    queryFn: async () => {
+      const res = await fetch(
+        `${process.env.REACT_APP_api_url}/productCategory`
+      );
+      const data = await res.json();
+      return data;
+    },
+  });
+  const allCategory = catego?.map((category) => category?.categoryName);
+
+  if (isLoading) {
+    return <Spinner></Spinner>;
+  }
+  // const allCategory = ["Lenovo", "Apple", "Dell"];
+
   // console.log(allCategory);
 
   ///  handle add product
@@ -82,6 +105,7 @@ const AddProduct = () => {
             sellerId: user?.uid,
             sellerEmail: user?.email,
           };
+          /// workinG
           // console.log(product);
           // /// --2 save product information to the database
           fetch(`${process.env.REACT_APP_api_url}/products`, {
@@ -301,12 +325,12 @@ const AddProduct = () => {
                 {...register("categoryName")}
                 className="select select-bordered w-full "
               >
-                <option disabled>Please Select a Product Category</option>
-                {allCategory?.map((category, i) => (
-                  <option value={category} key={i}>
-                    {category}
-                  </option>
-                ))}
+                {allCategory.length &&
+                  allCategory?.map((category, i) => (
+                    <option value={category} key={i}>
+                      {category}
+                    </option>
+                  ))}
               </select>
             </div>
             {/* description */}

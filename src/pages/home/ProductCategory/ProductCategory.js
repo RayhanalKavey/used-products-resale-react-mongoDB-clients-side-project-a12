@@ -9,7 +9,7 @@ import "./ProductCategory.css";
 const ProductCategory = () => {
   useTitle("Product Category");
   /// --2 get product category data from data base using TanStack query //refetch
-  const { data: productCategory, isLoading } = useQuery({
+  const { data: categories, isLoading } = useQuery({
     queryKey: ["productCategory"],
     queryFn: async () => {
       const res = await fetch(
@@ -26,11 +26,12 @@ const ProductCategory = () => {
 
   return (
     <div>
-      <PrimaryHeading customClass="text-center mt-14">
+      <PrimaryHeading customClass="text-center mt-20">
         Product Category
       </PrimaryHeading>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3  mx-4 my-8 mb-14 gap-5  ">
-        {productCategory?.map((category) => (
+      <div className="grid md:grid-cols-2 lg:grid-cols-3  mx-4 lg:mx-1 my-8 mb-14 gap-5  ">
+        {categories?.map((category) => (
+          // workinG
           <Link
             key={category?._id}
             to={`/productCategory/${category?.categoryName}`}

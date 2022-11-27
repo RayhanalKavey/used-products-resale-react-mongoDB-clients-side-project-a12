@@ -10,7 +10,8 @@ const Product = () => {
 
   const data = useLoaderData();
   const products = data;
-
+  // console.log("products", data);
+  // console.log("products", categoryName);
   return (
     <>
       <div className="grid  grid-cols-1 justify-items-center mx-3 my-14 gap-10">

@@ -8,6 +8,7 @@ import useTitle from "../../../hooks/useTitle/useTitle";
 const AllBuyer = () => {
   useTitle("Buyers");
 
+  //Generic modal
   const [deletingBuyer, setDeletingBuyer] = useState(null);
   const closeModal = () => {
     setDeletingBuyer(null);
