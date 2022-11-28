@@ -23,8 +23,9 @@ const ProductDetails = ({ productDetails }) => {
     description,
     yearOfPurchase,
     soldStatus,
+    paymentStatus,
   } = productDetails;
-
+  // console.log(paymentStatus);
   ///Load seller for this product
   /// load seller data
   const {
@@ -133,6 +134,7 @@ const ProductDetails = ({ productDetails }) => {
       </div>
       {clearModal && (
         <BookingModal
+          productDetails={productDetails}
           itemName={name}
           itemImg={img}
           productPrice={resalePrice}

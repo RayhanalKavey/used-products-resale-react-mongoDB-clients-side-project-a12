@@ -12,10 +12,13 @@ const Product = () => {
   const products = data;
   // console.log("products", data);
   // console.log("products", categoryName);
+  const unsoldProducts = products?.filter(
+    (unsold) => unsold?.paymentStatus !== "paid"
+  );
   return (
     <>
       <div className="grid  grid-cols-1  mx-4 my-14 gap-10">
-        {products?.map((productDetails) => (
+        {unsoldProducts?.map((productDetails) => (
           <ProductDetails
             key={productDetails?._id}
             productDetails={productDetails}

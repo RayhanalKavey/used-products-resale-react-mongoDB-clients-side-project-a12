@@ -21,8 +21,9 @@ const CheckoutForm = ({ bookedProduct }) => {
     price,
     productName,
     _id,
+    bookedProductId,
   } = bookedProduct;
-  // console.log(bookedProduct);
+  // console.log(bookedProduct?.bookedProductId);
 
   ///
   useEffect(() => {
@@ -90,6 +91,7 @@ const CheckoutForm = ({ bookedProduct }) => {
         email,
         bookingId: _id,
         paymentStatus: "paid",
+        bookedProductId,
       };
       fetch(`${process.env.REACT_APP_api_url}/payments`, {
         method: "POST",

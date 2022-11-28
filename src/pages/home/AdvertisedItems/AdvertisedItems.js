@@ -21,7 +21,8 @@ const AdvertisedItems = () => {
   const advertisedProducts = allProducts?.filter(
     (prod) =>
       prod?.advertisementStatus === "advertised" &&
-      prod?.soldStatus === "Available"
+      prod?.soldStatus === "Available" &&
+      prod?.paymentStatus !== "sold"
   );
   if (isLoading) {
     return <Spinner></Spinner>;

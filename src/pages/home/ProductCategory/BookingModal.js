@@ -2,10 +2,16 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
-const BookingModal = ({ itemName, itemImg, productPrice, setClearModal }) => {
+const BookingModal = ({
+  itemName,
+  itemImg,
+  productPrice,
+  setClearModal,
+  productDetails,
+}) => {
   const { user } = useContext(AuthContext);
   // const
-
+  // console.log(productDetails?._id);
   const handleBooking = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -15,15 +21,17 @@ const BookingModal = ({ itemName, itemImg, productPrice, setClearModal }) => {
     const price = form.price.value;
     const phone = form.phone.value;
     const meetingLocation = form.mLocation.value;
+    const bookedProductId = productDetails?._id;
 
     const booking = {
       productName,
       buyerName,
       email,
-      phone,
-      meetingLocation,
       itemImg,
       price,
+      phone,
+      meetingLocation,
+      bookedProductId,
     };
 
     ///post bookings
