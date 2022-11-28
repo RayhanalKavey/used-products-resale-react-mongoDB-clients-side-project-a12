@@ -25,8 +25,8 @@ const ProductCategory = () => {
   }
 
   return (
-    <div>
-      <PrimaryHeading customClass="text-center mt-20">
+    <div className="my-28">
+      <PrimaryHeading customClass="text-center ">
         Product Category
       </PrimaryHeading>
       <div className="grid md:grid-cols-2 lg:grid-cols-3  mx-4 lg:mx-1 my-8 mb-14 gap-5  ">
