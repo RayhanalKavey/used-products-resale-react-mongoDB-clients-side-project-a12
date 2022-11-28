@@ -93,12 +93,20 @@ const MyOrders = () => {
                 <div>
                   <span className="font-semibold">Price:</span> {price} tk
                 </div>
-                <div className="card-actions justify-end">
-                  <Link to={`/dashboard/payment/${_id}`}>
-                    <button className="btn btn-primary w-full mt-5">
-                      Pay Now
+                <div className="card-actions justify-end ">
+                  {product?.paymentStatus !== "paid" ? (
+                    <div className="w-full">
+                      <Link to={`/dashboard/payment/${_id}`}>
+                        <button className="btn btn-primary w-full mt-5">
+                          Pay Now
+                        </button>
+                      </Link>
+                    </div>
+                  ) : (
+                    <button className="btn btn-success w-full mt-5" disabled>
+                      Paid
                     </button>
-                  </Link>
+                  )}
                 </div>
               </div>
             </div>

@@ -83,34 +83,30 @@ const CheckoutForm = ({ bookedProduct }) => {
     }
     ///
     if (paymentIntent.status === "succeeded") {
-      setSuccess("Payment successful.");
-      setTransactionId(paymentIntent.id);
-
-      // // console.log("paymentIntent", paymentIntent);
-      // console.log("card info", card);
       // ///store payment info in database workinG
-      // const payment = {
-      //   price,
-      //   transactionId: paymentIntent.id,
-      //   email,
-      //   bookingId: _id,
-      // };
-      // fetch(`https://accudental-2-server.vercel.app/payments`, {
-      //   method: "POST",
-      //   headers: {
-      //     "content-type": "application/json",
-      //     authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      //   },
-      //   body: JSON.stringify(payment),
-      // })
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     console.log(data); ////////
-      //     if (data.insertedId) {
-      //       setSuccess("Congrats! Your payment completed.");
-      //       setTransactionId(paymentIntent.id);
-      //     }
-      //   });
+      const payment = {
+        price,
+        transactionId: paymentIntent.id,
+        email,
+        bookingId: _id,
+        paymentStatus: "paid",
+      };
+      fetch(`${process.env.REACT_APP_api_url}/payments`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          // authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(payment),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.insertedId) {
+            setSuccess("Payment successful.");
+            setTransactionId(paymentIntent.id);
+          }
+        });
     }
     setProcessing(false);
     ///
