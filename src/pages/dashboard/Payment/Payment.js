@@ -14,29 +14,21 @@ console.log(stripePromise);
 const Payment = () => {
   useTitle("Payment");
   const bookedProduct = useLoaderData();
-  // console.log(bookedProduct);
-  const {
-    buyerName,
-    email,
-    itemImg,
-    meetingLocation,
-    phone,
-    price,
-    productName,
-    _id,
-  } = bookedProduct;
+
   return (
     <div>
       <PrimaryHeading customClass="text-center mt-12">
         Billing Information for{" "}
-        <span className="text-primary font-semibold">{productName}</span>
+        <span className="text-primary font-semibold">
+          {bookedProduct?.productName}
+        </span>
       </PrimaryHeading>
       <div className=" w-96 mt-10 mx-auto  shadow-slate-600 shadow-lg rounded px-6 py-8 ">
         <Elements stripe={stripePromise}>
           <SecondaryHeading customClass="text-center mb-6">
             Payment Details
           </SecondaryHeading>
-          <CheckoutForm />
+          <CheckoutForm bookedProduct={bookedProduct} />
         </Elements>
       </div>
     </div>
