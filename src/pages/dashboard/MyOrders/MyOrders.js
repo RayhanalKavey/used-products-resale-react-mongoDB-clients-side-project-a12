@@ -2,17 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import PrimaryHeading from "../../../components/PrimaryHeading/PrimaryHeading";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-import Spinner from "../../../components/Spinner/Spinner";
 import toast from "react-hot-toast";
 import { FaLocationArrow, FaPhone } from "react-icons/fa";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
+import { Link } from "react-router-dom";
 
 const MyOrders = () => {
   useTitle("My Order");
   const { user } = useContext(AuthContext);
   const [allBookedProducts, setAllBookedProducts] = useState([]);
-  const { email } = user;
 
   const getData = async () => {
     try {
@@ -62,6 +60,7 @@ const MyOrders = () => {
             meetingLocation,
             buyerName,
             itemImg,
+            _id,
           } = product;
 
           return (
@@ -95,9 +94,11 @@ const MyOrders = () => {
                   <span className="font-semibold">Price:</span> {price} tk
                 </div>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary w-full mt-5">
-                    Pay Now
-                  </button>
+                  <Link to={`/dashboard/payment/${_id}`}>
+                    <button className="btn btn-primary w-full mt-5">
+                      Pay Now
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

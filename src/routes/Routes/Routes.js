@@ -10,6 +10,7 @@ import AllBuyer from "../../pages/dashboard/AllBuyer/AllBuyer";
 import AllSeller from "../../pages/dashboard/AllSeller/AllSeller";
 import MyOrders from "../../pages/dashboard/MyOrders/MyOrders";
 import MyProduct from "../../pages/dashboard/MyProduct/MyProduct";
+import Payment from "../../pages/dashboard/Payment/Payment";
 import ReportedItems from "../../pages/dashboard/ReportedItem/ReportedItems";
 import Home from "../../pages/home/Home/Home";
 import Product from "../../pages/home/ProductCategory/Product";
@@ -63,6 +64,16 @@ const router = createBrowserRouter([
         element: (
           <BuyerRoute>
             <MyOrders></MyOrders>{" "}
+          </BuyerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payment/:id",
+        loader: ({ params }) =>
+          fetch(`${process.env.REACT_APP_api_url}/bookings/${params?.id}`),
+        element: (
+          <BuyerRoute>
+            <Payment></Payment>{" "}
           </BuyerRoute>
         ),
       },
