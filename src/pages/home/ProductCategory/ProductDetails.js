@@ -1,13 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { FaClock, FaLocationArrow, FaPhone } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import Spinner from "../../../components/Spinner/Spinner";
+import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import BookingModal from "./BookingModal";
 
 const ProductDetails = ({ productDetails }) => {
   useTitle("Product Details");
 
+  const { user } = useContext(AuthContext);
+  const { displayName, uid, email } = user;
   const [clearModal, setClearModal] = useState(true);
   const {
     img,
@@ -24,6 +29,7 @@ const ProductDetails = ({ productDetails }) => {
     yearOfPurchase,
     soldStatus,
     paymentStatus,
+    _id,
   } = productDetails;
   // console.log(paymentStatus);
   ///Load seller for this product
@@ -47,6 +53,32 @@ const ProductDetails = ({ productDetails }) => {
   const verifiedSeller = allSellerForVerification.find(
     (vSeller) => vSeller?.name === sellerName
   );
+  // console.log(verifiedSeller);
+  //Handle report to admin
+
+  const handleReportToAdmin = () => {
+    console.log("clicked");
+    const report = {
+      name,
+      img,
+      reportedProductId: _id,
+      reporterUserName: displayName,
+      reporterUserEmail: email,
+      reporterUserUid: uid,
+    };
+    fetch(`${process.env.REACT_APP_api_url}/reports`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(report),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.acknowledged) {
+          console.log("Data after report", data);
+          toast.success("Items reported successfully.");
+        }
+      });
+  };
   // console.log("for this product", verifiedSeller?.verifySeller);
   return (
     <div className="card lg:card-side bg-base-100 rounded h-full  shadow-slate-600 shadow-lg ">
@@ -122,13 +154,23 @@ const ProductDetails = ({ productDetails }) => {
           </div>
 
           {/* /// */}
-          <div className="w-full mt-5 ">
-            <label
-              htmlFor="booking-modal"
-              className="btn btn-primary w-full rounded"
-            >
-              Book Now
-            </label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="w-full mt-5 ">
+              <label
+                htmlFor="booking-modal"
+                className="btn btn-primary w-full rounded"
+              >
+                Book Now
+              </label>
+            </div>
+            <div className="w-full mt-5 ">
+              <button
+                onClick={() => handleReportToAdmin()}
+                className="btn btn-primary w-full  btn-outline rounded"
+              >
+                Report to Admin
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -1,7 +1,6 @@
 // import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useLoaderData } from "react-router-dom";
-import Spinner from "../../../components/Spinner/Spinner";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import ProductDetails from "./ProductDetails";
 

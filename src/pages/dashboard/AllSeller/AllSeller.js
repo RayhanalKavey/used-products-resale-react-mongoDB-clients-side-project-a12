@@ -80,7 +80,7 @@ const AllSeller = () => {
         </thead>
         <tbody>
           {/* <!-- row  --> */}
-          {sellers.map((seller, i) => (
+          {sellers?.map((seller, i) => (
             <tr className="border" key={seller._id}>
               <th className="border py-4 pl-2 ">{i + 1}</th>
               <td className="border py-2 pl-2">
