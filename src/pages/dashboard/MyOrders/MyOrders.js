@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PrimaryHeading from "../../../components/PrimaryHeading/PrimaryHeading";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import axios from "axios";
@@ -6,17 +6,20 @@ import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../../components/Spinner/Spinner";
 import toast from "react-hot-toast";
 import { FaLocationArrow, FaPhone } from "react-icons/fa";
+import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 
 const MyOrders = () => {
   useTitle("My Order");
-  const [bookedProducts, setBookedProducts] = useState([]);
+  const { user } = useContext(AuthContext);
+  const [allBookedProducts, setAllBookedProducts] = useState([]);
+  const { email } = user;
 
   const getData = async () => {
     try {
       const result = await axios.get(
         `${process.env.REACT_APP_api_url}/bookings`
       );
-      setBookedProducts(result.data);
+      setAllBookedProducts(result.data);
     } catch (error) {
       toast.error(error.message);
     }
@@ -25,6 +28,10 @@ const MyOrders = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  const bookedProducts = allBookedProducts.filter(
+    (product) => product?.email === user?.email
+  );
 
   // const {
   //   data: bookedProducts,
@@ -85,11 +92,11 @@ const MyOrders = () => {
                 </div>
                 <div className="divider mt-0 pt-0"></div>
                 <div>
-                  <span className="font-semibold">Price:</span> {price}
+                  <span className="font-semibold">Price:</span> {price} tk
                 </div>
                 <div className="card-actions justify-end">
                   <button className="btn btn-primary w-full mt-5">
-                    Buy Now
+                    Pay Now
                   </button>
                 </div>
               </div>

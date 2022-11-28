@@ -101,7 +101,7 @@ const BookingModal = ({ itemName, itemImg, productPrice, setClearModal }) => {
               type="text"
               name="price"
               placeholder="Product Price"
-              defaultValue={`${productPrice} tk`}
+              defaultValue={productPrice}
               className="input input-bordered w-full "
               disabled
             />
