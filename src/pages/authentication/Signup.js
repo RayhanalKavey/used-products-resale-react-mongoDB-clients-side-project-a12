@@ -53,11 +53,7 @@ const Signup = () => {
             .then((result) => {
               const user = result.user;
               toast.success(`Welcome ${user?.displayName}`);
-              handleUpdateUserProfile(name, photoURL);
-              const newUser = { name, email, photoURL, accountType };
-
-              //--1 save to data base and get token
-              setAuthToken(newUser);
+              handleUpdateUserProfile(name, photoURL, email, accountType);
             })
             .catch((error) => {
               setSignUpError(error.message);
@@ -68,14 +64,18 @@ const Signup = () => {
   };
 
   /// Update user profile.
-  const handleUpdateUserProfile = (name, photoURL) => {
+  const handleUpdateUserProfile = (name, photoURL, email, accountType) => {
     const profile = {
       displayName: name,
       photoURL: photoURL,
     };
     updateUserProfile(profile)
       .then((result) => {
-        setReload(false);
+        setReload(false); //reload when successfully signed up to update the photo
+        const newUser = { name, email, photoURL, accountType };
+        // console.log(newUser);
+        //--1 save to data base and get token
+        setAuthToken(newUser);
         // Navigate user to the desired path
         navigate(from, { replace: true });
       })

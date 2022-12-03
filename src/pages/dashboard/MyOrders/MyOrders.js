@@ -9,27 +9,35 @@ import { Link } from "react-router-dom";
 
 const MyOrders = () => {
   useTitle("My Order");
-  const { user } = useContext(AuthContext);
-  const [allBookedProducts, setAllBookedProducts] = useState([]);
+  const { user, logout, setUser } = useContext(AuthContext);
+  const [bookedProducts, setBookedProducts] = useState([]);
 
   const getData = async () => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_api_url}/bookings`
+        `${process.env.REACT_APP_api_url}/bookings?email=${user?.email}`, //workinG
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("laptop-utopia")}`,
+          },
+        }
       );
-      setAllBookedProducts(result.data);
+      console.log(result);
+      setBookedProducts(result.data);
     } catch (error) {
       toast.error(error.message);
+      // console.log(error.response.data.message);
+      // console.log(error.response.status);
+      if (error.response.status === 403) {
+        logout();
+        setUser(null);
+      }
     }
   };
 
   useEffect(() => {
     getData();
   }, []);
-
-  const bookedProducts = allBookedProducts.filter(
-    (product) => product?.email === user?.email
-  );
 
   // const {
   //   data: bookedProducts,
