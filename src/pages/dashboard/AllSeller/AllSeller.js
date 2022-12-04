@@ -20,7 +20,11 @@ const AllSeller = () => {
   } = useQuery({
     queryKey: ["users", "seller"],
     queryFn: async () => {
-      const res = await fetch(`${process.env.REACT_APP_api_url}/users/seller`);
+      const res = await fetch(`${process.env.REACT_APP_api_url}/users/seller`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("laptop-utopia")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
@@ -28,7 +32,7 @@ const AllSeller = () => {
 
   /// delete buyer
   const handleDeleteSeller = (seller) => {
-    console.log(seller);
+    // console.log(seller);
     fetch(`${process.env.REACT_APP_api_url}/users/${seller?._id}`, {
       method: "DELETE",
     })

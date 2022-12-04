@@ -22,8 +22,13 @@ const AllBuyer = () => {
   } = useQuery({
     queryKey: ["users", "buyer"],
     queryFn: async () => {
-      const res = await fetch(`${process.env.REACT_APP_api_url}/users/buyer`);
+      const res = await fetch(`${process.env.REACT_APP_api_url}/users/buyer`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("laptop-utopia")}`,
+        },
+      });
       const data = await res.json();
+      console.log(data);
       return data;
     },
   });

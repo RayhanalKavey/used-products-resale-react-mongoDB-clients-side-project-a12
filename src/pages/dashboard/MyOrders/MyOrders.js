@@ -22,7 +22,7 @@ const MyOrders = () => {
           },
         }
       );
-      console.log(result);
+      // console.log(result);
       setBookedProducts(result.data);
     } catch (error) {
       toast.error(error.message);
