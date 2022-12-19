@@ -27,7 +27,6 @@ const AdvertisedItems = () => {
   if (isLoading) {
     return <Spinner></Spinner>;
   }
-  // console.log(advertisedProducts);
 
   return (
     <>

@@ -8,8 +8,6 @@ const Main = () => {
     <div>
       <Navbar></Navbar>
       <Outlet></Outlet>
-      {/* <PrimaryButton>hel0oooooooooo</PrimaryButton>
-      <Spinner></Spinner> */}
       <Footer></Footer>
     </div>
   );

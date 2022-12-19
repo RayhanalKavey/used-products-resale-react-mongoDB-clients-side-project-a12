@@ -8,7 +8,7 @@ import CheckoutForm from "./CheckoutForm";
 import SecondaryHeading from "../../../components/SecondaryHeading/SecondaryHeading";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
-console.log(stripePromise);
+// console.log(stripePromise);
 
 //===============///=========================//
 const Payment = () => {

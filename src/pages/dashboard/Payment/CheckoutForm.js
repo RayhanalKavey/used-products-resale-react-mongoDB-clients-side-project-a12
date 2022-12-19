@@ -12,18 +12,7 @@ const CheckoutForm = ({ bookedProduct }) => {
 
   const stripe = useStripe();
   const elements = useElements();
-  const {
-    buyerName,
-    email,
-    itemImg,
-    meetingLocation,
-    phone,
-    price,
-    productName,
-    _id,
-    bookedProductId,
-  } = bookedProduct;
-  // console.log(bookedProduct?.bookedProductId);
+  const { buyerName, email, price, _id, bookedProductId } = bookedProduct;
 
   ///
   useEffect(() => {
@@ -32,7 +21,6 @@ const CheckoutForm = ({ bookedProduct }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify({ price }),
     })
@@ -62,8 +50,6 @@ const CheckoutForm = ({ bookedProduct }) => {
       setCardError(error.message);
     } else {
       setCardError("");
-
-      // console.log("[PaymentMethod]", paymentMethod);
     }
     // workinG
     setSuccess("");
@@ -103,7 +89,6 @@ const CheckoutForm = ({ bookedProduct }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (data.insertedId) {
             setSuccess("Payment successful.");
             setTransactionId(paymentIntent.id);
@@ -111,9 +96,6 @@ const CheckoutForm = ({ bookedProduct }) => {
         });
     }
     setProcessing(false);
-    ///
-
-    // console.log("Payment intent", paymentIntent);
   };
   return (
     <>

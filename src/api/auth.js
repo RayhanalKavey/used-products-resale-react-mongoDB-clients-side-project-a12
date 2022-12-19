@@ -10,7 +10,6 @@ export const setAuthToken = (user) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      // console.log("check updated user and token", data);
       //set token to the local storage
       localStorage.setItem("laptop-utopia", data.token);
     });

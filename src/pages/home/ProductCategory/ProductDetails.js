@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { FaClock, FaLocationArrow, FaPhone } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import Spinner from "../../../components/Spinner/Spinner";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import useTitle from "../../../hooks/useTitle/useTitle";
@@ -39,9 +38,13 @@ const ProductDetails = ({ productDetails }) => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["/users/seller"],
+    queryKey: ["/users", "/seller"],
     queryFn: async () => {
-      const res = await fetch(`${process.env.REACT_APP_api_url}/users/seller`);
+      const res = await fetch(`${process.env.REACT_APP_api_url}/users/seller`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("laptop-utopia")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
@@ -49,15 +52,13 @@ const ProductDetails = ({ productDetails }) => {
   if (isLoading) {
     return <Spinner></Spinner>;
   }
-  // console.log(allSellerForVerification);
-  const verifiedSeller = allSellerForVerification.find(
+  const verifiedSeller = allSellerForVerification?.find(
     (vSeller) => vSeller?.name === sellerName
   );
-  // console.log(verifiedSeller);
+
   //Handle report to admin
 
   const handleReportToAdmin = () => {
-    console.log("clicked");
     const report = {
       name,
       img,

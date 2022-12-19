@@ -8,7 +8,6 @@ const useSeller = (email) => {
       fetch(`${process.env.REACT_APP_api_url}/users/seller/${email}`)
         .then((res) => res.json())
         .then((data) => {
-          // console.log("useSeller", data);
           setIsSeller(data?.isSeller);
           setIsSellerLoading(false);
         });

@@ -31,7 +31,6 @@ const Signup = () => {
   // Handle Sign Up
   const handleSignUp = (data) => {
     const { name, email, password, photoURL, accountType } = data;
-    // console.log(accountType);
     setSignUpError("");
     const image = photoURL[0];
     const formData = new FormData();
@@ -45,7 +44,6 @@ const Signup = () => {
     })
       .then((res) => res.json())
       .then((imgData) => {
-        // console.log(imgData.data.url);
         if (imgData.success) {
           const photoURL = imgData.data.url;
           ///Create user with email and password starT
@@ -73,7 +71,6 @@ const Signup = () => {
       .then((result) => {
         setReload(false); //reload when successfully signed up to update the photo
         const newUser = { name, email, photoURL, accountType };
-        // console.log(newUser);
         //--1 save to data base and get token
         setAuthToken(newUser);
         // Navigate user to the desired path

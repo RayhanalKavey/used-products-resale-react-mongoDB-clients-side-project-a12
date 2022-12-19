@@ -32,7 +32,6 @@ const AllSeller = () => {
 
   /// delete buyer
   const handleDeleteSeller = (seller) => {
-    // console.log(seller);
     fetch(`${process.env.REACT_APP_api_url}/users/${seller?._id}`, {
       method: "DELETE",
     })
@@ -46,13 +45,11 @@ const AllSeller = () => {
   };
   ///verify seller workinG
   const handleVerifySeller = (seller) => {
-    console.log("Verify", seller);
     fetch(`${process.env.REACT_APP_api_url}/users/seller/${seller?._id}`, {
       method: "PUT",
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.modifiedCount > 0) {
           toast.success(`Seller ${seller?.name} verified successfully.`);
           refetch();

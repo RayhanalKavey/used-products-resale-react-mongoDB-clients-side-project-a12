@@ -26,16 +26,14 @@ const ReportedItems = () => {
       return data;
     },
   });
-  // console.log(allReports);
+
   ///
   const handleDeletingReport = (repo) => {
-    console.log("clicked", repo);
     fetch(`${process.env.REACT_APP_api_url}/reports/${repo?._id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         if (data.deletedCount > 0) {
           toast.success(
             `Report for ${deletingReport?.name} deleted successfully.`
@@ -48,7 +46,6 @@ const ReportedItems = () => {
   if (isLoading) {
     return <Spinner></Spinner>;
   }
-  // console.log(deletingReport);
 
   return (
     <div>

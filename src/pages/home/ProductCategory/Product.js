@@ -9,8 +9,6 @@ const Product = () => {
 
   const data = useLoaderData();
   const products = data;
-  // console.log("products", data);
-  // console.log("products", categoryName);
   const unsoldProducts = products?.filter(
     (unsold) => unsold?.paymentStatus !== "paid"
   );

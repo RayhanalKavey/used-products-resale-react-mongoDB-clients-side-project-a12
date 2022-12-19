@@ -12,22 +12,19 @@ const MyOrders = () => {
   const { user, logout, setUser } = useContext(AuthContext);
   const [bookedProducts, setBookedProducts] = useState([]);
 
-  const getData = async () => {
+  const getData = async (email) => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_api_url}/bookings?email=${user?.email}`, //workinG
+        `${process.env.REACT_APP_api_url}/bookings?email=${email}`, //workinG
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("laptop-utopia")}`,
           },
         }
       );
-      // console.log(result);
       setBookedProducts(result.data);
     } catch (error) {
       toast.error(error.message);
-      // console.log(error.response.data.message);
-      // console.log(error.response.status);
       if (error.response.status === 403) {
         logout();
         setUser(null);
@@ -36,7 +33,7 @@ const MyOrders = () => {
   };
 
   useEffect(() => {
-    getData();
+    getData(user?.email);
   }, []);
 
   // const {
@@ -55,7 +52,6 @@ const MyOrders = () => {
   // if (isLoading) {
   //   return <Spinner></Spinner>;
   // }
-  // console.log(bookedProducts);
   return (
     <div className="mt-10">
       <PrimaryHeading customClass="text-center">My Orders</PrimaryHeading>

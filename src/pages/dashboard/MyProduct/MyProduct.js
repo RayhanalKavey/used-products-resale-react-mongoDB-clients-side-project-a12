@@ -47,7 +47,6 @@ const MyProduct = () => {
   };
   ///handle Advertisement --4 workinG
   const handleAdvertisement = (product) => {
-    // console.log("clicked", product._id);
     fetch(
       `${process.env.REACT_APP_api_url}/products/advertised/${product?._id}`,
       {

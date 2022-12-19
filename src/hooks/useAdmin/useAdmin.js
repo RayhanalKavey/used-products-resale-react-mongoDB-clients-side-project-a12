@@ -8,7 +8,6 @@ const useAdmin = (email) => {
       fetch(`${process.env.REACT_APP_api_url}/users/admin/${email}`)
         .then((res) => res.json())
         .then((data) => {
-          // console.log("useAdmin", data);
           setIsAdmin(data?.isAdmin);
           setIsAdminLoading(false);
         });
