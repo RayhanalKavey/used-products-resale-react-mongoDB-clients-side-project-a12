@@ -8,6 +8,7 @@ import Blog from "../../pages/Blog/Blog";
 import AddProduct from "../../pages/dashboard/AddProduct/AddProduct";
 import AllBuyer from "../../pages/dashboard/AllBuyer/AllBuyer";
 import AllSeller from "../../pages/dashboard/AllSeller/AllSeller";
+import DashboardMain from "../../pages/dashboard/DashboardMain/DashboardMain";
 import MyOrders from "../../pages/dashboard/MyOrders/MyOrders";
 import MyProduct from "../../pages/dashboard/MyProduct/MyProduct";
 import Payment from "../../pages/dashboard/Payment/Payment";
@@ -59,6 +60,7 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage></ErrorPage>,
     children: [
+      { path: "/dashboard", element: <DashboardMain></DashboardMain> },
       {
         path: "/dashboard/myOrders",
         element: (

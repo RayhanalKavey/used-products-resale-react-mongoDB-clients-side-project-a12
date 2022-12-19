@@ -34,36 +34,36 @@ const DashboardLayout = () => {
           <ul className="menu p-4 w-52  gap-2 text-base-content bg-secondary  lg:bg-white">
             <PrimaryHeading
               customClass={
-                "text-xl font-semibold mb-2 bg-primary px-4 py-2 text-white rounded "
+                "text-xl font-semibold mb-2 bg-primary px-4 py-2 text-white rounded  "
               }
             >
               DashBoard
             </PrimaryHeading>
             {/* <!-- Sidebar content here --> */}
             {isBuyer && (
-              <li>
+              <li className="font-semibold ">
                 <Link to={"/dashboard/myOrders"}>My Orders</Link>
               </li>
             )}
             {isSeller && (
               <>
-                <li>
+                <li className="font-semibold ">
                   <Link to={"/dashboard/myProduct"}>My Product</Link>
                 </li>
-                <li>
+                <li className="font-semibold ">
                   <Link to={"/dashboard/AddProduct"}>Add Product</Link>
                 </li>
               </>
             )}
             {isAdmin && (
               <>
-                <li>
+                <li className="font-semibold ">
                   <Link to={"/dashboard/allBuyer"}>All Buyer</Link>
                 </li>
-                <li>
+                <li className="font-semibold ">
                   <Link to={"/dashboard/allSeller"}>All Seller</Link>
                 </li>
-                <li>
+                <li className="font-semibold ">
                   <Link to={"/dashboard/reportedItems"}>Reported Items</Link>
                 </li>
               </>
