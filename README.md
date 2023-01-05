@@ -6,25 +6,17 @@
 
 Need a laptop? then you are in the right place.
 
-- We sell laptops to three companies. The three categories showed in the home page. By clicking the category card you can see the product details.
-- There are two types of sign up procedure. One can sign up as buyer or seller. The features of buyer and seller are different.
-- Buyer can book a meeting to buy the product, and can see his/her bookings in the dashboard route.
-- Seller can add product and manage product form dashboard.
-- Dashboard UI is different for both buyer and seller.
-- There is one more controller, the admin. Admin can see all sellers, all buyers and reported items. Login information as buyer are given below.
-- Some important concepts about the technology used on this website are in the blog section.
-- Firebase authentication system is applied in this application. Like, google login, email password login, GitHub login, etc.
+- Online booking for reselling laptops with three user roles buyer, seller, and admin. Buyers, sellers, and admin are controlled with a private route, specific user route, and JWT token
+- Buyers can order and report products. Sellers can add, delete and advertise their products. Admin can see sellers, buyers, and reported items. Admin also can delete any of them and can verify a seller
+- Website is responsive for mobile, laptop, and desktop. All the generated data is integrated with the backend. Stripe payment method implemented in this project for buying a product
 
 ### Technology used in the Project
 
-- React
-- React Router DOM
-- React Hot Toast
-- Tailwind CSS , daisyUI, React date picker
-- Firebase
-- MongoDb
-- TanStack Query
-- Axios
+- React.js, React Router, React Hot Toast, React date picker
+- Tailwind CSS , daisyUI,
+- Firebase Authentication
+- Node.js, Express, MongoDb
+- TanStack Query, Axios, Stripe Payment
 
 ---
 
