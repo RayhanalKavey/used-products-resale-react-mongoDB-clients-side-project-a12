@@ -9,7 +9,7 @@ import useTitle from "../../../hooks/useTitle/useTitle";
 const MyProduct = () => {
   useTitle("My Products");
   const { user } = useContext(AuthContext);
-
+  console.log(user?.email);
   //Generic modal
   const [deletingProduct, setDeletingProduct] = useState(null);
   const closeModal = () => {
@@ -17,20 +17,20 @@ const MyProduct = () => {
   };
 
   // Load  seller products
-  const {
-    data: products,
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["products", user?.displayName],
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch(
-        `${process.env.REACT_APP_api_url}/products/${user?.displayName}`
-      );
+      const res = await fetch(`${process.env.REACT_APP_api_url}/products`);
       const data = await res.json();
       return data;
     },
   });
+
+  const products = data?.filter(
+    (product) => product?.sellerEmail === user?.email
+  );
+  // console.log(data);
+  // console.log(products);
 
   // delete product --4
   const handleDeleteProduct = (product) => {
