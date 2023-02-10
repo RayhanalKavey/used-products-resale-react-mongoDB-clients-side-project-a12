@@ -17,7 +17,7 @@ const Payment = () => {
 
   return (
     <div>
-      <PrimaryHeading customClass="text-center mt-12">
+      <PrimaryHeading customclassName="text-center mt-12">
         Billing Information for{" "}
         <span className="text-primary font-semibold">
           {bookedProduct?.productName}
@@ -25,7 +25,7 @@ const Payment = () => {
       </PrimaryHeading>
       <div className=" w-96 mt-10 mx-auto  shadow-slate-600 shadow-lg rounded px-6 py-8 ">
         <Elements stripe={stripePromise}>
-          <SecondaryHeading customClass="text-center mb-6">
+          <SecondaryHeading customclassName="text-center mb-6">
             Payment Details
           </SecondaryHeading>
           <CheckoutForm bookedProduct={bookedProduct} />

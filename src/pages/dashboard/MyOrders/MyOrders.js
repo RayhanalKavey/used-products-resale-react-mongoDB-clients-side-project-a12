@@ -54,7 +54,7 @@ const MyOrders = () => {
   // }
   return (
     <div className="mt-10">
-      <PrimaryHeading customClass="text-center">My Orders</PrimaryHeading>
+      <PrimaryHeading customclassName="text-center">My Orders</PrimaryHeading>
       <div className="grid md:grid-cols-2 lg:grid-cols-3  mx-4 lg:mx-8 mt-8 mb-14 gap-8 justify-center ">
         {bookedProducts?.map((product) => {
           const {

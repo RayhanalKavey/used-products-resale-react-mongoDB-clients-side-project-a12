@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import ConfirmationModal from "../../../components/ConfirmationModal/ConfirmationModal";
+import Skeleton from "../../../components/Spinner/Skeleton";
 import Spinner from "../../../components/Spinner/Spinner";
 import useTitle from "../../../hooks/useTitle/useTitle";
 
@@ -46,7 +47,7 @@ const AllBuyer = () => {
       });
   };
   if (isLoading) {
-    return <Spinner></Spinner>;
+    return <Skeleton></Skeleton>;
   }
   return (
     <div>

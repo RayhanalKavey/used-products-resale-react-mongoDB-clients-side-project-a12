@@ -8,6 +8,7 @@ import useTitle from "../../../hooks/useTitle/useTitle";
 import { format } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../../components/Spinner/Spinner";
+import Skeleton from "../../../components/Spinner/Skeleton";
 
 /*
     img, (Product image)
@@ -66,7 +67,7 @@ const AddProduct = () => {
   });
   const allCategory = catego?.map((category) => category?.categoryName);
   if (isLoading) {
-    return <Spinner></Spinner>;
+    return <Skeleton></Skeleton>;
   }
   // const allCategory = ["Lenovo", "Apple", "Dell"];
 
@@ -125,7 +126,7 @@ const AddProduct = () => {
   //----------------------------///-------------------------------//
   return (
     <div className="  w-auto flex flex-col   shadow-slate-600 shadow-lg  p-8 m-12 rounded ">
-      <PrimaryHeading customClass=" text-center mb-5">
+      <PrimaryHeading customclassName=" text-center mb-5">
         Add Product
       </PrimaryHeading>
       <form onSubmit={handleSubmit(handleAddProduct)}>

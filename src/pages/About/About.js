@@ -9,10 +9,10 @@ const About = () => {
 
   return (
     <div className="mb-10 px-3">
-      <PrimaryHeading customClass="text-center mt-8 mb-2 font-bold ">
+      <PrimaryHeading customclassName="text-center mt-8 mb-2 font-bold ">
         Welcome to Laptop Utopia
       </PrimaryHeading>
-      <SecondaryHeading customClass="text-center">
+      <SecondaryHeading customclassName="text-center">
         Need a laptop? then you are in the right place.
       </SecondaryHeading>
       <h3 className="font-semibold mb-2">Description</h3>

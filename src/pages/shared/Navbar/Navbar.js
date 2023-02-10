@@ -45,9 +45,9 @@ const Navbar = () => {
             <Link onClick={handleSignOut}> Logout</Link>
           </li>
           {user?.photoURL ? (
-            <li className="mr-1 sm:mr-5">
+            <li className="mr-1 sm:mr-5 ">
               <img
-                className="w-12 h-12 rounded-full"
+                className="w-12 h-12 rounded-[999px] user-img"
                 src={user?.photoURL}
                 alt=""
                 title={user?.displayName}

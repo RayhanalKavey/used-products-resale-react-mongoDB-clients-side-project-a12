@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import Skeleton from "../../components/Spinner/Skeleton";
 import Spinner from "../../components/Spinner/Spinner";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import useAdmin from "../../hooks/useAdmin/useAdmin";
@@ -9,7 +10,7 @@ const AdminRoute = ({ children }) => {
   const [isAdmin, setIsAdminLoading] = useAdmin(user?.email);
   const location = useLocation();
   if (loading || setIsAdminLoading) {
-    return <Spinner></Spinner>;
+    return <Skeleton></Skeleton>;
   }
   if (user?.uid && isAdmin) {
     return children;

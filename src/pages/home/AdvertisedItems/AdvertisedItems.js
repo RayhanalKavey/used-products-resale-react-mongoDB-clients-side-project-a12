@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { FaClock, FaLocationArrow, FaPhone, FaTimes } from "react-icons/fa";
 import PrimaryHeading from "../../../components/PrimaryHeading/PrimaryHeading";
+import SkeletonHorizontal from "../../../components/Spinner/SkeletonHorizontal";
 import Spinner from "../../../components/Spinner/Spinner";
 
 const AdvertisedItems = () => {
@@ -25,22 +26,30 @@ const AdvertisedItems = () => {
       prod?.paymentStatus !== "sold"
   );
   if (isLoading) {
-    return <Spinner></Spinner>;
+    return <SkeletonHorizontal></SkeletonHorizontal>;
   }
 
   return (
     <>
       {advertisedProducts?.length > 0 && (
         <div className="mt-20">
-          <PrimaryHeading customClass="text-center">
+          <PrimaryHeading customclassName="text-center">
             Our Available Products
           </PrimaryHeading>
           <div className="grid md:grid-cols-2 lg:grid-cols-3  mx-4 lg:mx-1 my-8 mb-14 gap-7 justify-center ">
             {advertisedProducts?.map((product) => (
               <div
                 key={product?._id}
-                className="card    shadow-slate-600 shadow-lg rounded"
+                // className="card    shadow-slate-600 shadow-lg rounded"
+                className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
               >
+                <figure>
+                  <img
+                    className="w-full max-h-52 rounded-t-md"
+                    src={product?.img}
+                    alt="advertised product"
+                  />
+                </figure>
                 <div className="card-body">
                   <h2 className="card-title justify-center mb-5">
                     {product?.name}
@@ -65,17 +74,9 @@ const AdvertisedItems = () => {
                       <div> {product?.sellerMobileNo}</div>
                     </div>
                   </div>
-                  {/* // */}
                   <div className="divider"></div>
                   <p>{product?.description}</p>
                 </div>
-                <figure>
-                  <img
-                    className="w-full max-h-60"
-                    src={product?.img}
-                    alt="advertised product"
-                  />
-                </figure>
               </div>
             ))}
           </div>

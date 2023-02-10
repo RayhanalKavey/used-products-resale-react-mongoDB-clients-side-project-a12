@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { FaClock, FaLocationArrow, FaPhone } from "react-icons/fa";
+import Skeleton from "../../../components/Spinner/Skeleton";
 import Spinner from "../../../components/Spinner/Spinner";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import useTitle from "../../../hooks/useTitle/useTitle";
@@ -50,7 +51,7 @@ const ProductDetails = ({ productDetails }) => {
     },
   });
   if (isLoading) {
-    return <Spinner></Spinner>;
+    return <Skeleton></Skeleton>;
   }
   const verifiedSeller = allSellerForVerification?.find(
     (vSeller) => vSeller?.name === sellerName

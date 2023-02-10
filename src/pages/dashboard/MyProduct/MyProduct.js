@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import ConfirmationModal from "../../../components/ConfirmationModal/ConfirmationModal";
+import Skeleton from "../../../components/Spinner/Skeleton";
 import Spinner from "../../../components/Spinner/Spinner";
 import { AuthContext } from "../../../context/AuthProvider/AuthProvider";
 import useTitle from "../../../hooks/useTitle/useTitle";
@@ -63,7 +64,7 @@ const MyProduct = () => {
   };
 
   if (isLoading) {
-    return <Spinner></Spinner>;
+    return <Skeleton></Skeleton>;
   }
   return (
     <>

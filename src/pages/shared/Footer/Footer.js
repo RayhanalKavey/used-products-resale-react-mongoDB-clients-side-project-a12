@@ -52,6 +52,7 @@ const Footer = () => {
           </Link>
         </div>
       </div>
+      {/* <hr className="my-6 border-secondary sm:mx-auto dark:border-white-700 lg:my-8 " /> */}
       <div>
         <p>
           Copyright © 2022 - All right reserved by{" "}

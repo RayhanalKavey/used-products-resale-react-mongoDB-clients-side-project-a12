@@ -5,11 +5,9 @@ import SecondaryHeading from "../../../components/SecondaryHeading/SecondaryHead
 
 const CustomerReview = () => {
   return (
-    <div className=" bg-secondary py-16 mb-20">
-      <PrimaryHeading customClass="text-center mb-4">
-        Don't Just Take Out Word For it
-      </PrimaryHeading>
-      <SecondaryHeading customClass="text-center mb-4 ">
+    <div className="   my-32">
+      <PrimaryHeading>Don't Just Take Out Word For it</PrimaryHeading>
+      <SecondaryHeading>
         See what some of our users have to say
       </SecondaryHeading>
       <div className=" grid md:grid-cols-2 lg:grid-cols-3 gap-5 items-center justify-center mx-3">
